@@ -4,30 +4,21 @@ import "./styles.css";
 export default function App() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
+  const [message, setMessage]= useState("")
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username === "user" && password === "password") {
-      setError("");
-      setIsSubmitted(true);
+        setMessage(`Welcome, ${username}!`)
     } else {
-      setError("Invalid username or password");
-      setIsSubmitted(false);
+      setMessage("Invalid username or password");
+    
     }
   };
   return (
     <div className="App">
       <h1>Login Page</h1>
-      {isSubmitted ? (
-        <div>
-          <p> Welcome,{username}!</p>
-        </div>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          {error && <p className="error">{error}</p>}
-          <label htmlFor="username" id="username">
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="username" id="username">
             Username:
           </label>
           <input
@@ -56,7 +47,7 @@ export default function App() {
           <br />
           <button type="submit">Submit</button>
         </form>
-      )}
+    {message && <p>{message}</p>}
     </div>
   );
 }
